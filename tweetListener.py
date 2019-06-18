@@ -5,6 +5,7 @@ from tweepy.streaming import StreamListener
 from time import sleep
 import json
 import config
+import pandas as pd
 
 games_dict = {
     "pubg": ['pubg', '#pubg', '#PUBGM', 'PUBG'],
@@ -31,9 +32,18 @@ follow_ids = ['16582027', '747807250819981312', '103065157', '3131144855', '2021
               "75223552", "532247573", "3131144855", "375146901"]
 
 games_key_words = []
-for game in games_dict.values():
-    for game_key_word in game:
-        games_key_words.append(game_key_word)
+games_df = []
+
+
+def create_list_of_keywords():
+    for game in games_dict.values():
+        for game_key_word in game:
+            games_key_words.append(game_key_word)
+
+
+def create_games_df():
+    for game in games_dict.values():
+        games_df.append(pd.DataFrame(columns=['Name', 'Age']))
 
 
 def game_csv_num(tweet_data):
@@ -71,6 +81,9 @@ auth = OAuthHandler(config.consumer_key, config.consumer_secret)
 auth.set_access_token(config.access_token, config.access_token_secret)
 api = tweepy.API(auth)
 twitter_stream = Stream(auth, MyListener())
+
+create_list_of_keywords()
+create_games_df()
 
 while True:
     try:
