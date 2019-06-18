@@ -47,10 +47,10 @@ def create_games_df():
 
 
 def game_csv_num(tweet_data):
-    for game in games_dict.values():
-        for game_key_word in game:
-            if tweet_data.find(game_key_word):
-                return game.key
+    for gameName, values in games_dict.iteritems():
+        for val in values:
+            if tweet_data.find(val):
+                return gameName
     return -1
 
 
