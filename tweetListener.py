@@ -28,6 +28,7 @@ games_dict = {
 
 follow_ids = ['16582027', '61033129','577401044','425871040','15411797','708959670065631232','997194164788842497',
               '719324795167309827','176507184','1604298906','191636054','140070953','138372303']
+
 games_key_words = []
 games_df_dict = []
 
@@ -44,10 +45,10 @@ def create_games_df():
 
 
 def game_csv_num(tweet_data):
-    # check which game this data belong to.
-    for idx, keyWord in enumerate(games_key_words):
-        if tweet_data.find(keyWord):
-            return idx
+    for game in games_dict.values():
+        for game_key_word in game:
+            if tweet_data.find(game_key_word):
+                return game.key
     return -1
 
 
@@ -61,8 +62,8 @@ class MyListener(StreamListener):
     def on_data(self, data):
         try:
             tweet_json = json.loads(data)
-            gameNumber = game_csv_num(tweet_json)
-            write_to_df_num(gameNumber, tweet_json)
+            game_number = game_csv_num(tweet_json)
+            write_to_df_num(game_number, tweet_json)
 
         except BaseException as e:
             print("Error on_data: %s" % str(e))
