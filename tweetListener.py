@@ -6,7 +6,7 @@ from time import sleep
 import json
 import config
 
-game_dict = {
+games_dict = {
     "pubg": ['pubg', '#pubg', '#PUBGM', 'PUBG'],
     "dota": ['#Dota', '#Dota2', 'Dota', '#Dota_2', '#Dota2'],
     "LOL": ['league of legends', 'League of Legends', '#LeagueOfLegends', '#league_of_legends'],
@@ -30,16 +30,15 @@ follow_ids = ['16582027', '747807250819981312', '103065157', '3131144855', '2021
               "196994616", "15010349", "25073877", "2797521996", "704652692891820032", "856010760", "169426475",
               "75223552", "532247573", "3131144855", "375146901"]
 
-track_words = []
-
-for values in game_dict.values():
-    for val in values:
-        track_words.append(val)
+games_key_words = []
+for game in games_dict.values():
+    for game_key_word in game:
+        games_key_words.append(game_key_word)
 
 
 def game_csv_num(tweet_data):
     # check which game this data belong to.
-    for idx, keyWord in enumerate(track_words):
+    for idx, keyWord in enumerate(games_key_words):
         if tweet_data.find(keyWord):
             return idx
     return -1
@@ -60,6 +59,7 @@ class MyListener(StreamListener):
 
         except BaseException as e:
             print("Error on_data: %s" % str(e))
+
         return True
 
     def on_error(self, status):
@@ -74,9 +74,8 @@ twitter_stream = Stream(auth, MyListener())
 
 while True:
     try:
-        twitter_stream.filter(track=track_words,
-                              follow=follow_ids,
-                              languages='en')
+        twitter_stream.filter(track=games_key_words, follow=follow_ids, languages='en')
+
     except:
         print("err. but continues")
         sleep(3000)  # sleep 5 minutes and try again
