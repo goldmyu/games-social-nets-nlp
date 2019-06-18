@@ -18,7 +18,7 @@ games_dict = {
     "guildwars": ['#Guild Wars 2', '#GuildWars2', '#GW2', 'Guild Wars 2'],
     "sims": ['Sims 4', 'the sims 4', 'sims4', 'The Sims 4', 'Sims_4', '#the_sims_4', '#sims4', '#sims'],
     "wow": ['#WowClassic', 'WorldOfWarcraft', '#classicwow', '#WorldofWarcraft', '#vanillawow', '#wowvanilla',
-            '#warcraft', '#wowstream'],
+            '#warcraft', '#wowstream','battle for azeroth','#battleforazeroth'],
     "overwatch": ['Overwatch', '#Overwatch'],
     "HOTS": ['Heroes of the storm', '#Heroes of the storm', '#hots', '#heroesofthestorm'],
     "minecraft": ['minecraft', '#minecraft'],
@@ -26,8 +26,8 @@ games_dict = {
                      '#BloodstainedRitualoftheNight'],
     "COD": ['Call of Duty : Black Ops 4', 'Call of Duty Black Ops 4', '#BlackOps4', '#BO4', '#CallOfDuty', '#COD']}
 
-follow_ids = ['16582027', '61033129','577401044','425871040','15411797']
-
+follow_ids = ['16582027', '61033129','577401044','425871040','15411797','708959670065631232','997194164788842497',
+              '719324795167309827','176507184','1604298906','191636054','140070953','138372303']
 games_key_words = []
 games_df = []
 
