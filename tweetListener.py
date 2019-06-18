@@ -29,7 +29,7 @@ games_dict = {
 follow_ids = ['16582027', '61033129','577401044','425871040','15411797','708959670065631232','997194164788842497',
               '719324795167309827','176507184','1604298906','191636054','140070953','138372303']
 games_key_words = []
-games_df = []
+games_df_dict = []
 
 
 def create_list_of_keywords():
@@ -40,7 +40,7 @@ def create_list_of_keywords():
 
 def create_games_df():
     for game in games_dict.values():
-        games_df.append(pd.DataFrame(columns=['Name', 'Age']))
+        games_df_dict.append({game : pd.DataFrame(columns=['x'])})
 
 
 def game_csv_num(tweet_data):
