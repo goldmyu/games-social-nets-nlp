@@ -41,15 +41,15 @@ def create_list_of_keywords():
             games_key_words.append(game_key_word)
 
 
-def create_games_df():
-    for game in games_dict.values():
-        games_df_dict.append({game : pd.DataFrame(columns=['x'])})
+# def create_games_df():
+#     for game in games_dict.values():
+#         games_df_dict.append({game : pd.DataFrame(columns=['x'])})
 
 
 def game_csv_num(tweet_data):
-    for gameName, values in games_dict.iteritems():
-        for val in values:
-            if tweet_data.find(val):
+    for gameName, game_key_words in games_dict.items():
+        for key_word in game_key_words:
+            if tweet_data.find(key_word):
                 return gameName
     return -1
 
@@ -83,11 +83,11 @@ api = tweepy.API(auth)
 twitter_stream = Stream(auth, MyListener())
 
 create_list_of_keywords()
-create_games_df()
+# create_games_df()
 
 while True:
     try:
-        twitter_stream.filter(track=games_key_words, follow=follow_ids, languages='en')
+        twitter_stream.filter(track=games_key_words, follow=follow_ids)
 
     except:
         print("err. but continues")
