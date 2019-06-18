@@ -33,16 +33,17 @@ follow_ids = ['16582027', '61033129', '577401044', '425871040', '15411797', '708
               '816711729581158400', '67146159', '239970376', '47787563', '2420931980',
               '793477314793406465', '1861393146', '64565898', '214174332', '3253758956']
 
-datasets_folder = 'data-sets/'
-games_key_words = []
-games_df_dict = {}
-
 tweet_data_fields = ['created_at', 'id', 'id_str', 'text', 'source', 'truncated', 'in_reply_to_status_id',
                      'in_reply_to_status_id_str', 'in_reply_to_user_id', 'in_reply_to_user_id_str',
                      'in_reply_to_screen_name', 'user', 'geo', 'coordinates', 'place', 'contributors',
                      'quoted_status_id', 'quoted_status_id_str', 'quoted_status', 'quoted_status_permalink',
                      'is_quote_status', 'quote_count', 'reply_count', 'retweet_count', 'favorite_count', 'entities',
                      'favorited', 'retweeted', 'filter_level', 'lang', 'timestamp_ms']
+
+datasets_folder = 'data-sets/'
+dump_to_csv_limit = 1000
+games_key_words = []
+games_df_dict = {}
 
 
 def create_list_of_keywords():
@@ -75,7 +76,7 @@ def write_df_to_csv(df, game_name):
 def write_tweet_to_game_df(game_name, tweet_data):
     game_df = games_df_dict.get(game_name)
     games_df_dict[game_name] = game_df.append(tweet_data, ignore_index=True)
-    if games_df_dict[game_name].shape[0] > 1:
+    if games_df_dict[game_name].shape[0] > dump_to_csv_limit:
         write_df_to_csv(games_df_dict[game_name], game_name)
         games_df_dict[game_name] = games_df_dict[game_name].iloc[0:0]
 
