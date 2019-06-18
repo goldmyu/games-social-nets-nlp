@@ -8,6 +8,8 @@ import config
 import pandas as pd
 import os
 
+# =====================================================================================================================
+
 games_dict = {
     "pubg": ['pubg', '#pubg', '#PUBGM', 'PUBG'],
     "dota": ['#Dota', '#Dota2', 'Dota', '#Dota_2', '#Dota2'],
@@ -40,11 +42,15 @@ tweet_data_fields = ['created_at', 'id', 'id_str', 'text', 'source', 'truncated'
                      'is_quote_status', 'quote_count', 'reply_count', 'retweet_count', 'favorite_count', 'entities',
                      'favorited', 'retweeted', 'filter_level', 'lang', 'timestamp_ms']
 
+# =====================================================================================================================
+
 datasets_folder = 'data-sets/'
 dump_to_csv_limit = 1000
 games_key_words = []
 games_df_dict = {}
 
+
+# =====================================================================================================================
 
 def create_list_of_keywords():
     for game in games_dict.values():
