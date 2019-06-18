@@ -67,6 +67,8 @@ def game_CSV_num(tweet_data):
             return idx
     return -1
 
+
+
 def write_to_df_num(game_number,tweet_data):
     #TODO add tweet_data to DF that belong to him.
     #TODO if one of the dataframes bigger than 1000 add it to CSV and clean that dataFrame
