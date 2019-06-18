@@ -45,7 +45,7 @@ tweet_data_fields = ['created_at', 'id', 'id_str', 'text', 'source', 'truncated'
 # =====================================================================================================================
 
 datasets_folder = 'data-sets/'
-dump_to_csv_limit = 1000
+dump_to_csv_limit = 100
 games_key_words = []
 games_df_dict = {}
 
@@ -85,6 +85,7 @@ def write_tweet_to_game_df(game_name, tweet_data):
     if games_df_dict[game_name].shape[0] > dump_to_csv_limit:
         write_df_to_csv(games_df_dict[game_name], game_name)
         games_df_dict[game_name] = games_df_dict[game_name].iloc[0:0]
+        print("Flushed tweets from df to CSV file of game : {}".format(game_name))
 
 
 class MyListener(StreamListener):
