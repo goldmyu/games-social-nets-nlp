@@ -60,7 +60,7 @@ def create_list_of_keywords():
 
 def create_games_df():
     for game_name, _ in games_dict.items():
-        games_df_dict.update({game_name: pd.DataFrame(columns = tweet_data_fields)})
+        games_df_dict.update({game_name: pd.DataFrame(columns=tweet_data_fields)})
 
 
 def get_game_from_tweet(tweet_data):
