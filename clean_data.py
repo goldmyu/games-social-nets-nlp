@@ -5,11 +5,16 @@ from nltk.tokenize import word_tokenize
 import string
 
 # import nltk
-# nltk.download()
+# nltk.download('punkt')
 
 # =================================================================================================
-data = pd.read_csv("data-sets/fortnite.csv")
-clean_data = data['text'][0:10000].copy()
+dataset_name = 'minecraft.csv'
+# data = pd.read_csv("data-sets/" + dataset_name, usecols=['created_at', 'id', 'text', 'source',
+# 'truncated','retweeted', 'lang'])
+
+data = pd.read_csv("data-sets/" + dataset_name, usecols=['text', 'lang'])
+# clean_data = data['text'][0:10000].copy()
+# data_filtered = filter(lambda x: x[1] in ('en'),data)
 
 # =================================================================================================
 
@@ -67,13 +72,11 @@ def clean_tweets(tweet):
 
 p.set_options(p.OPT.URL, p.OPT.MENTION, p.OPT.EMOJI, p.OPT.SMILEY, p.OPT.RESERVED)
 
-for i in range(10000):
-    print(data['text'][i])
-    clean_data[i] = p.clean(data['text'][i])
-    clean_data[i] = clean_tweets(clean_data[i])
-    print(clean_data[i])
-    # print("\n")
-    # if i%10000==0:
-    #     print("iteration {}".format(i))
+for i in range(data.shape[0]):
+    before_clean = data['text'][i]
+    data['text'][i] = p.clean(data['text'][i])
+    data['text'][i] = clean_tweets(data['text'][i])
+    if i % 100 == 0:
+        print(before_clean + "\n" + data['text'][i])
 
-clean_data.to_csv("data-sets/clean_fortnite_data.csv", index=False)
+data.to_csv("data-sets/cleaned-data-sets/clean_" + dataset_name, index=False)
