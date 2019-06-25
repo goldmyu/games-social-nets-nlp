@@ -9,12 +9,12 @@ import string
 
 # =================================================================================================
 dataset_name = 'minecraft.csv'
-# data = pd.read_csv("data-sets/" + dataset_name, usecols=['created_at', 'id', 'text', 'source',
-# 'truncated','retweeted', 'lang'])
+data = pd.read_csv("data-sets/" + dataset_name, usecols=['created_at', 'id', 'text', 'source','truncated','retweeted', 'lang'])
 
-data = pd.read_csv("data-sets/" + dataset_name, usecols=['text', 'lang'])
-# clean_data = data['text'][0:10000].copy()
-# data_filtered = filter(lambda x: x[1] in ('en'),data)
+# filtered only english data
+is_english_data = data.lang == 'en'
+english_data = data[is_english_data]
+
 
 # =================================================================================================
 
