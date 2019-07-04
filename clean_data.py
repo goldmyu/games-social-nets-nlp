@@ -1,21 +1,22 @@
+import ast
+import numbers
+import os
+
 import pandas as pd
 import re  # regular expression
 import preprocessor as p
 from nltk.tokenize import word_tokenize
 import string
+import json
 
 # import nltk
 # nltk.download('punkt')
 
 # =================================================================================================
-dataset_name = 'minecraft.csv'
-# data = pd.read_csv("data-sets/" + dataset_name, usecols=['created_at', 'id', 'text', 'source',
-# 'truncated','retweeted', 'lang'])
-
-data = pd.read_csv("data-sets/" + dataset_name, usecols=['text', 'lang'])
-# clean_data = data['text'][0:10000].copy()
-# data_filtered = filter(lambda x: x[1] in ('en'),data)
-
+datasets_folder = 'data-sets/cleaned-data-sets/'
+dataset_name = 'fortnite.csv'
+data = pd.read_csv("data-sets/" + dataset_name, usecols=['text', 'lang', 'truncated', 'extended_tweet'])
+clean_data = pd.DataFrame(columns=['text'])
 # =================================================================================================
 
 # HappyEmoticons
@@ -72,11 +73,34 @@ def clean_tweets(tweet):
 
 p.set_options(p.OPT.URL, p.OPT.MENTION, p.OPT.EMOJI, p.OPT.SMILEY, p.OPT.RESERVED)
 
-for i in range(data.shape[0]):
-    before_clean = data['text'][i]
-    data['text'][i] = p.clean(data['text'][i])
-    data['text'][i] = clean_tweets(data['text'][i])
-    if i % 100 == 0:
-        print(before_clean + "\n" + data['text'][i])
 
-data.to_csv("data-sets/cleaned-data-sets/clean_" + dataset_name, index=False)
+def write_df_to_csv(df):
+    game_clean_csv = datasets_folder + 'clean_' + dataset_name
+    print('Saving cleaned tweet dataframe to csv : ' + game_clean_csv)
+    if os.path.isfile(game_clean_csv):
+        df.to_csv(game_clean_csv, mode='a', header=False, index=False)
+    else:
+        df.to_csv(game_clean_csv, index=False)
+
+
+def clean_tweet_data(tweet_to_clean):
+    tweet_to_clean = p.clean(tweet_to_clean)
+    return clean_tweets(tweet_to_clean)
+
+
+for i in range(data.shape[0]):
+    if data['lang'][i] == 'en':
+        before_clean = data['text'][i]
+        extended_tweet = data['extended_tweet'][i]
+        if not isinstance(extended_tweet, numbers.Number):
+            extended_tweet = ast.literal_eval(extended_tweet)
+        if data['truncated'][i] and bool(extended_tweet['full_text']):
+            clean_tweet = clean_tweet_data(extended_tweet['full_text'])
+            clean_data = clean_data.append({'text': clean_tweet}, ignore_index=True)
+        else:
+            clean_tweet = clean_tweet_data(clean_tweet_data(data['text'][i]))
+            clean_data = clean_data.append({'text': clean_tweet}, ignore_index=True)
+        if i % 1000 == 0:
+            print('original tweet:\n' + before_clean + "\nCleaned Tweet:\n" + clean_tweet)
+            write_df_to_csv(clean_data)
+            clean_data = clean_data.iloc[0:0]

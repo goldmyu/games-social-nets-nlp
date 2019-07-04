@@ -16,15 +16,15 @@ games_dict = {
     "LOL": ['league of legends', 'League of Legends', '#LeagueOfLegends', '#league_of_legends'],
     "fifa": ['Fifa', '#fifa'],
     "hearthstone": ['#Hearthstone', 'Hearthstone'],
-    "fortnite": ['Fortnite', '#Fortnite', 'fortnite', '#fortnitestreamer', '#FortniteBattleRoyale', '#FortniteSeason9',
-                 '#FortniteWorldCup', '#FortniteProAM', '#fortnite'],
+    "fortnite": ['Fortnite', '#Fortnite', 'fortnite', '#fortnitestreamer', '#FortniteBattleRoyale',
+        '#FortniteSeason9', '#FortniteWorldCup', '#FortniteProAM', '#fortnite'],
     "guildwars": ['#Guild Wars 2', '#GuildWars2', '#GW2', 'Guild Wars 2'],
     "sims": ['Sims 4', 'the sims 4', 'sims4', 'The Sims 4', 'Sims_4', '#the_sims_4', '#sims4', '#sims',
              '#TS4IslandLiving', 'simmer', '#TheSims4IslandLiving'],
     "wow": ['#WowClassic', 'WorldOfWarcraft', '#classicwow', '#WorldofWarcraft', '#vanillawow', '#wowvanilla',
             '#warcraft', '#wowstream', 'battle for azeroth', '#battleforazeroth'],
     "overwatch": ['Overwatch', '#Overwatch'],
-    "HOTS": ['Heroes of the storm', '#Heroes of the storm', '#hots', '#heroesofthestorm'],
+    "HOTS": ['Heroes of the storm', '#Heroes_of_the_storm', '#hots', '#heroesofthestorm'],
     "minecraft": ['minecraft', '#minecraft'],
     "bloodstained": ['Bloodstained: Ritual of the Night', 'Bloodstained Ritual of the Night', '#Bloodstained',
                      '#BloodstainedRitualoftheNight'],
@@ -66,7 +66,7 @@ def create_games_df():
 def get_game_from_tweet(tweet_data):
     for gameName, game_key_words in games_dict.items():
         for key_word in game_key_words:
-            if tweet_data['text'].find(key_word) >= 0:
+            if (tweet_data['text'].lower()).find(key_word.lower()) >= 0:
                 return gameName
     return -1
 
