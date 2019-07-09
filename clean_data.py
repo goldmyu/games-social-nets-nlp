@@ -9,8 +9,8 @@ from nltk.tokenize import word_tokenize
 import string
 import json
 
-# import nltk
-# nltk.download('punkt')
+import nltk
+nltk.download('punkt')
 
 # =================================================================================================
 datasets_folder = 'data-sets/cleaned-data-sets/'
