@@ -28,7 +28,8 @@ games_dict = {
     "minecraft": ['minecraft', '#minecraft'],
     "bloodstained": ['Bloodstained: Ritual of the Night', 'Bloodstained Ritual of the Night', '#Bloodstained',
                      '#BloodstainedRitualoftheNight'],
-    "COD": ['Call of Duty : Black Ops 4', 'Call of Duty Black Ops 4', '#BlackOps4', '#BO4', '#CallOfDuty', '#COD']}
+    "COD": ['Call of Duty : Black Ops 4', 'Call of Duty Black Ops 4', '#BlackOps4', '#BO4', '#CallOfDuty', '#COD'],
+    'gamergate': ["#GamerGate", "GamerGate"]}
 
 follow_ids = ['16582027', '61033129', '577401044', '425871040', '15411797', '708959670065631232', '997194164788842497',
               '719324795167309827', '176507184', '1604298906', '191636054', '140070953', '138372303', '1209608880',
