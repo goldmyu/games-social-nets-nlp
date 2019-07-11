@@ -57,7 +57,8 @@ w2v_model = Word2Vec(min_count=7,
                      sample=6e-5,
                      alpha=0.03,
                      min_alpha=0.0005,
-                     negative=0,
+                     negative=5,
+                     sg=1,
                      workers=4)
 
 w2v_model.build_vocab(clean_data, progress_per=10000)
