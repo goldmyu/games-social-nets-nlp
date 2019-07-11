@@ -18,8 +18,6 @@ for row in (row_list):
         list = row[0].split()
         words_list.extend(list)
 
-# stop_words_set = set(stopwords.words("english"))
-# words_list = [w for w in words_list if w not in stop_words_set]
 c = Counter(words_list)
 print(c.most_common(1000))
 print("f")
