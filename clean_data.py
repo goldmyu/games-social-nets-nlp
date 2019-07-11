@@ -6,16 +6,22 @@ import pandas as pd
 import re  # regular expression
 import preprocessor as p
 from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+
 import string
 import json
-
 import nltk
-# nltk.download('punkt')
+nltk.download('punkt')
+
 
 # =================================================================================================
-datasets_folder = 'data-sets/cleaned-data-sets/'
+# datasets_folder = 'data-sets/'
+datasets_folder = '../../../../work/twitter_data_games/'
+clean_data_set_folder = datasets_folder + 'cleaned-data-sets/'
+
 dataset_name = 'fortnite.csv'
-data = pd.read_csv("data-sets/" + dataset_name, usecols=['text', 'lang', 'truncated', 'extended_tweet'])
+
+data = pd.read_csv(datasets_folder + dataset_name, usecols=['text', 'lang', 'truncated', 'extended_tweet'])
 clean_data = pd.DataFrame(columns=['text'])
 # =================================================================================================
 
@@ -43,6 +49,9 @@ emoticons = emoticons_happy.union(emoticons_sad)
 
 def clean_tweets(tweet):
     # after tweepy preprocessing the colon symbol left remain after      #removing mentions
+    tweet = p.clean(tweet)
+    tweet = tweet.lower()
+
     tweet = re.sub(r':', '', tweet)
     tweet = re.sub(r'‚Ä¶', '', tweet)
     tweet = re.sub(r'\'', '', tweet)
@@ -66,26 +75,20 @@ def clean_tweets(tweet):
         # check tokens against stop words , emoticons and punctuations
         if w not in emoticons and w not in string.punctuation:
             filtered_tweet.append(w)
+
     return ' '.join(filtered_tweet)
-    # print(word_tokens)
-    # print(filtered_sentence)return tweet
 
 
 p.set_options(p.OPT.URL, p.OPT.MENTION, p.OPT.EMOJI, p.OPT.SMILEY, p.OPT.RESERVED)
 
 
 def write_df_to_csv(df):
-    game_clean_csv = datasets_folder + 'clean_' + dataset_name
+    game_clean_csv = clean_data_set_folder + 'clean_' + dataset_name
     print('Saving cleaned tweet dataframe to csv : ' + game_clean_csv)
     if os.path.isfile(game_clean_csv):
         df.to_csv(game_clean_csv, mode='a', header=False, index=False)
     else:
         df.to_csv(game_clean_csv, index=False)
-
-
-def clean_tweet_data(tweet_to_clean):
-    tweet_to_clean = p.clean(tweet_to_clean)
-    return clean_tweets(tweet_to_clean)
 
 
 for i in range(data.shape[0]):
@@ -95,10 +98,10 @@ for i in range(data.shape[0]):
         if not isinstance(extended_tweet, numbers.Number):
             extended_tweet = ast.literal_eval(extended_tweet)
         if data['truncated'][i] and bool(extended_tweet['full_text']):
-            clean_tweet = clean_tweet_data(extended_tweet['full_text'])
+            clean_tweet = clean_tweets(extended_tweet['full_text'])
             clean_data = clean_data.append({'text': clean_tweet}, ignore_index=True)
         else:
-            clean_tweet = clean_tweet_data(clean_tweet_data(data['text'][i]))
+            clean_tweet = clean_tweets(data['text'][i])
             clean_data = clean_data.append({'text': clean_tweet}, ignore_index=True)
         if i % 1000 == 0:
             print('original tweet:\n' + before_clean + "\nCleaned Tweet:\n" + clean_tweet)
