@@ -16,7 +16,7 @@ games_dict = {
     "LOL": ['league of legends', 'League of Legends', '#LeagueOfLegends', '#league_of_legends'],
     "fifa": ['Fifa', '#fifa'],
     "hearthstone": ['#Hearthstone', 'Hearthstone'],
-    "fortnite": ['Fortnite', '#Fortnite', 'fortnite', '#fortnitestreamer', '#FortniteBattleRoyale',
+    "fortnite1": ['Fortnite', '#Fortnite', 'fortnite', '#fortnitestreamer', '#FortniteBattleRoyale',
         '#FortniteSeason9', '#FortniteWorldCup', '#FortniteProAM', '#fortnite'],
     "guildwars": ['#Guild Wars 2', '#GuildWars2', '#GW2', 'Guild Wars 2'],
     "sims": ['Sims 4', 'the sims 4', 'sims4', 'The Sims 4', 'Sims_4', '#the_sims_4', '#sims4', '#sims',
@@ -45,7 +45,7 @@ tweet_data_fields = ['created_at', 'id', 'id_str', 'text', 'source', 'truncated'
 
 # =====================================================================================================================
 
-datasets_folder = 'data-sets/'
+datasets_folder = '../../../../work/twitter_data_games/'
 dump_to_csv_limit = 100
 games_key_words = []
 games_df_dict = {}
