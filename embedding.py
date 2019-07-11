@@ -24,7 +24,7 @@ path = get_tmpfile("word2vec.model")
 #
 # df = df.drop_duplicates()
 # df.to_csv("clean-fortnite-no-duplicates2.csv", index=False)
-df = pd.read_csv("clean-fortnite-no-duplicates2.csv")
+df = pd.read_csv("clean-fortnite-no-duplicates-no-stopwords.csv")
 
 clean_data=[]
 for i in range(df.shape[0]):
