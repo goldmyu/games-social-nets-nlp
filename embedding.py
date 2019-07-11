@@ -3,16 +3,14 @@ from gensim.models import Word2Vec
 import pandas as pd
 import pickle
 
-from nltk.corpus import stopwords
 import nltk
+from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-#
+
 # nltk.download('punkt')
 # nltk.download('stopwords')
+
 stop_words = set(stopwords.words('english'))
-
-
-
 
 path = get_tmpfile("word2vec.model")
 #
@@ -26,7 +24,7 @@ path = get_tmpfile("word2vec.model")
 # df.to_csv("clean-fortnite-no-duplicates2.csv", index=False)
 df = pd.read_csv("clean-fortnite-no-duplicates-no-stopwords.csv")
 
-clean_data=[]
+clean_data = []
 for i in range(df.shape[0]):
     sentence = df.loc[i].loc['text']
     if isinstance(sentence, str):
@@ -37,8 +35,8 @@ for i in range(df.shape[0]):
         filtered_sentence = []
 
         for w in word_tokens:
-         if w not in stop_words:
-             filtered_sentence.append(w)
+            if w not in stop_words:
+                filtered_sentence.append(w)
         clean_data.append(filtered_sentence)
         # print(word_tokens)
         # print(filtered_sentence)
@@ -49,12 +47,10 @@ for i in range(df.shape[0]):
 #     itemlist = pickle.load(fp)
 
 
-
 #
 w2v_model = Word2Vec(min_count=7,
                      window=5,
-                     size=50,
-                     sample=6e-5,
+                     size=70,
                      negative=5,
                      sg=1,
                      workers=4)
@@ -71,7 +67,6 @@ w2v_model.wv.most_similar(positive=['woman', 'king'], negative=['man'])
 w2v_model.save("fortnite.model")
 # with open ('fortnite-lowered', 'rb') as fp:
 #     itemlist = pickle.load(fp)
-
 
 
 #
