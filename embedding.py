@@ -55,8 +55,6 @@ w2v_model = Word2Vec(min_count=7,
                      window=5,
                      size=50,
                      sample=6e-5,
-                     alpha=0.03,
-                     min_alpha=0.0005,
                      negative=5,
                      sg=1,
                      workers=4)
