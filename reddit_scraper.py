@@ -3,7 +3,7 @@ import configparser
 import pandas as pd
 import datetime as dt
 
-country='armenia'
+country='sub-fortnite'
 def get_date(created):
     return dt.datetime.fromtimestamp(created)
 
@@ -34,8 +34,9 @@ reddit = praw.Reddit(client_id=config['REDDIT']['personal_use_script'],
                      password=config['REDDIT']['password'])
 
 print(reddit.user.me())
-subreddit = reddit.subreddit(country)
-top_subreddit = subreddit.search('israel')
+subreddit = reddit.subreddit('fortnite')
+# top_subreddit = subreddit.search('israel')
+# top_subreddit = subreddit.search("fortnite")
 topics_dict = { "title":[], \
                 "author":[], \
                 "score":[], \
@@ -46,7 +47,8 @@ topics_dict = { "title":[], \
                 "shortlink":[], \
                 "type":[]}
 bag_of_text=[]
-for submission in top_subreddit:
+# for submission in top_subreddit:
+for submission in subreddit.hot(limit=100000):
     print(submission.title, submission.id)
     submission.comments.replace_more(limit=0)
 
