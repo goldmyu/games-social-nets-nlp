@@ -14,7 +14,7 @@ nltk.download('punkt')
 
 # =================================================================================================
 datasets_folder = 'data-sets/cleaned-data-sets/'
-dataset_name = 'fortnite.csv'
+dataset_name = 'fortnite_old.csv'
 data = pd.read_csv("data-sets/" + dataset_name, usecols=['text', 'lang', 'truncated', 'extended_tweet'])
 clean_data = pd.DataFrame(columns=['text'])
 # =================================================================================================
