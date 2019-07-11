@@ -24,6 +24,7 @@ path = get_tmpfile("word2vec.model")
 # df.to_csv("clean-fortnite-no-duplicates2.csv", index=False)
 df = pd.read_csv("clean-fortnite-no-duplicates-no-stopwords.csv")
 
+sentences=[]
 clean_data = []
 for i in range(df.shape[0]):
     sentence = df.loc[i].loc['text']
@@ -37,6 +38,8 @@ for i in range(df.shape[0]):
         for w in word_tokens:
             if w not in stop_words:
                 filtered_sentence.append(w)
+        sentence =' '.join(word for word in filtered_sentence)
+        sentences.append(sentence)
         clean_data.append(filtered_sentence)
         # print(word_tokens)
         # print(filtered_sentence)
@@ -46,13 +49,14 @@ for i in range(df.shape[0]):
 # with open ('fortnite-lowered', 'rb') as fp:
 #     itemlist = pickle.load(fp)
 
-
+df1 = pd.DataFrame(sentences)
+df1.to_csv("clean.csv",index=False)
 #
 w2v_model = Word2Vec(min_count=7,
                      window=5,
                      size=70,
                      negative=5,
-                     sg=1,
+                     sg=2,
                      workers=4)
 
 w2v_model.build_vocab(clean_data, progress_per=10000)
@@ -64,7 +68,7 @@ w2v_model.train(clean_data, total_examples=w2v_model.corpus_count, epochs=50, re
 # model.train(clean_data, total_examples=len(clean_data), epochs=10)
 
 w2v_model.wv.most_similar(positive=['woman', 'king'], negative=['man'])
-w2v_model.save("fortnite.model")
+w2v_model.save("embedding-models/fortnite.model")
 # with open ('fortnite-lowered', 'rb') as fp:
 #     itemlist = pickle.load(fp)
 
