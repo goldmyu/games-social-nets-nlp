@@ -93,21 +93,25 @@ def write_df_to_csv(df):
 
 for i in range(data.shape[0]):
     if data['lang'][i] == 'en':
+        before_clean = data['text'][i]
+        extended_tweet = data['extended_tweet'][i]
+        if not isinstance(extended_tweet, numbers.Number):
+            extended_tweet = ast.literal_eval(extended_tweet)
         try:
-            before_clean = data['text'][i]
-            extended_tweet = data['extended_tweet'][i]
-            if not isinstance(extended_tweet, numbers.Number):
-                extended_tweet = ast.literal_eval(extended_tweet)
             if data['truncated'][i] and bool(extended_tweet['full_text']):
                 clean_tweet = clean_tweets(extended_tweet['full_text'])
                 clean_data = clean_data.append({'text': clean_tweet}, ignore_index=True)
             else:
                 clean_tweet = clean_tweets(data['text'][i])
                 clean_data = clean_data.append({'text': clean_tweet}, ignore_index=True)
-            if i % 10000 == 0:
-                print('original tweet:\n' + before_clean + "\nCleaned Tweet:\n" + clean_tweet)
-                write_df_to_csv(clean_data)
-                clean_data = clean_data.iloc[0:0]
         except TypeError as e:
             print("During data cleaning an Error occurred at index {}\nError is : {}".format(i, e))
+            clean_tweet = clean_tweets(data['text'][i])
+            clean_data = clean_data.append({'text': clean_tweet}, ignore_index=True)
+
+        if i % 10000 == 0:
+            print('original tweet:\n' + before_clean + "\nCleaned Tweet:\n" + clean_tweet)
+            write_df_to_csv(clean_data)
+            clean_data = clean_data.iloc[0:0]
+
 write_df_to_csv(clean_data)
