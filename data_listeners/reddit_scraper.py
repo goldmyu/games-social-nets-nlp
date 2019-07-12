@@ -3,7 +3,7 @@ import configparser
 import pandas as pd
 import datetime as dt
 
-country='sub-fortnite'
+game= 'pubg'
 def get_date(created):
     return dt.datetime.fromtimestamp(created)
 
@@ -25,7 +25,7 @@ def reply_and_nested_reply( comment):
 
 
 config = configparser.ConfigParser()
-config.read("credentials.ini")
+config.read("..\credentials.ini")
 
 reddit = praw.Reddit(client_id=config['REDDIT']['personal_use_script'],
                      client_secret=config['REDDIT']['secret'],
@@ -34,7 +34,7 @@ reddit = praw.Reddit(client_id=config['REDDIT']['personal_use_script'],
                      password=config['REDDIT']['password'])
 
 print(reddit.user.me())
-subreddit = reddit.subreddit('fortnite')
+subreddit = reddit.subreddit('pubg')
 # top_subreddit = subreddit.search('israel')
 # top_subreddit = subreddit.search("fortnite")
 topics_dict = { "title":[], \
@@ -80,12 +80,46 @@ for submission in subreddit.hot(limit=100000):
 
 
 
+subreddit = reddit.subreddit('all')
+top_subreddit = subreddit.search(game)
+
+for submission in top_subreddit:
+    print(submission.title, submission.id)
+    submission.comments.replace_more(limit=0)
+
+    topics_dict["title"].append(submission.title)
+    topics_dict["author"].append(submission.author)
+    topics_dict["score"].append(submission.score)
+    topics_dict["id"].append(submission.id)
+    topics_dict["url"].append(submission.url)
+    topics_dict["comms_num"].append(submission.num_comments)
+    topics_dict["created"].append(submission.created)
+    topics_dict["body"].append(submission.selftext)
+    topics_dict["shortlink"].append(submission.shortlink)
+    topics_dict["type"].append("topic")
+    bag_of_text.append(submission.title)
+    bag_of_text.append(submission.selftext)
+    for comment in submission.comments._comments:
+        topics_dict["title"].append(submission.title)
+        topics_dict["author"].append(comment.author)
+        topics_dict["score"].append(comment.score)
+        topics_dict["id"].append(comment.id)
+        topics_dict["url"].append("")
+        topics_dict["comms_num"].append("")
+        topics_dict["created"].append(comment.created)
+        topics_dict["body"].append(comment.body)
+        topics_dict["shortlink"].append(comment.permalink)
+        topics_dict["type"].append("comment")
+        bag_of_text.append(comment.body)
+        reply_and_nested_reply(comment)
+
+
 
 topics_data = pd.DataFrame(topics_dict)
 _timestamp = topics_data["created"].apply(get_date)
 
 topics_data = topics_data.assign(timestamp = _timestamp)
-topics_data.to_csv(country+'.csv', index=False)
+topics_data.to_csv(game + '.csv', index=False)
 
 text_data = pd.DataFrame(bag_of_text)
-text_data.to_csv(country+'_text.csv', index=False)
+text_data.to_csv(game + '_text.csv', index=False)
