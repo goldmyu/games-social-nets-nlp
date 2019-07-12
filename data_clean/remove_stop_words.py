@@ -8,7 +8,7 @@ from nltk.tokenize import word_tokenize
 stop_words = set(stopwords.words('english'))
 
 
-game_name = 'pubg'
+game_name = 'pubg_text'
 data_set_folder = "../data-sets/cleaned-data-sets/"
 df = pd.read_csv(data_set_folder + "/clean_" + game_name + ".csv")
 

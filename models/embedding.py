@@ -15,16 +15,17 @@ stop_words = set(stopwords.words('english'))
 # ======================================================================================================================
 
 path = get_tmpfile("word2vec.model")
-game_name = 'pubg'
+game_name = 'pubg_text'
 df = pd.read_csv("data-sets/cleaned-data-sets/clean_no_stop_words_" + game_name + ".csv")
 
 # ======================================================================================================================
 
 data_stream = []
 for i in range(df.shape[0]):
-    sentence = df.loc[i].loc['text']
-    word_tokens = word_tokenize(sentence)
-    data_stream.append(word_tokens)
+    sentence = df['text'][i]
+    if isinstance(sentence, str):
+        word_tokens = word_tokenize(sentence)
+        data_stream.append(word_tokens)
 
 
 w2v_model = Word2Vec(min_count=7,
