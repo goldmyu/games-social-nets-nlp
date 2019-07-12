@@ -19,7 +19,7 @@ import nltk
 datasets_folder = '../../../../work/twitter_data_games/'
 clean_data_set_folder = datasets_folder + 'cleaned-data-sets/'
 
-dataset_name = 'fortnite.csv'
+dataset_name = 'pubg.csv'
 
 data = pd.read_csv(datasets_folder + dataset_name, usecols=['text', 'lang', 'truncated', 'extended_tweet'])
 clean_data = pd.DataFrame(columns=['text'])
