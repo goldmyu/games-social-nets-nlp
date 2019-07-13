@@ -3,7 +3,7 @@ import configparser
 import pandas as pd
 import datetime as dt
 
-game= 'pubg'
+game= 'FUTMobile'
 def get_date(created):
     return dt.datetime.fromtimestamp(created)
 
