@@ -13,9 +13,9 @@ import nltk
 nltk.download('punkt')
 
 # =================================================================================================
-datasets_folder = 'data-sets/'
-dataset_name = 'subreddit-fortnite.csv'
-# data = pd.read_csv("data-sets/" + dataset_name, usecols=['text', 'lang', 'truncated', 'extended_tweet'])
+datasets_folder = '../data-sets/'
+dataset_name = 'pubg_text.csv'
+data = pd.read_csv("../data-sets/" + dataset_name)
 clean_data = pd.DataFrame(columns=['text'])
 # =================================================================================================
 
@@ -95,7 +95,6 @@ def clean_tweet_data(tweet_to_clean):
     return clean_tweets(tweet_to_clean).lower()
 
 
-data = pd.read_csv("sub-fortnite_text.csv")
 data['0'] = data['0'].str.replace('http\S+|www.\S+', '', case=False)
 
 for i in range(data.shape[0]):

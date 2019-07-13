@@ -63,7 +63,8 @@ def clean_tweets(tweet):
 
     # replace consecutive non-ASCII characters with a space
     tweet = re.sub(r'[^\x00-\x7F]+', ' ', tweet)
-
+    regex = re.compile('[^a-zA-Z ]')
+    tweet = regex.sub('', tweet)
     # remove emojis from tweet
     tweet = emoji_pattern.sub(r'', tweet)
     # filter using NLTK library append it to a string
