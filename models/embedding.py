@@ -32,7 +32,7 @@ w2v_model = Word2Vec(min_count=7,
                      window=5,
                      size=70,
                      negative=5,
-                     sg=2,
+                     sg=1,
                      workers=4)
 
 w2v_model.build_vocab(data_stream, progress_per=100)
