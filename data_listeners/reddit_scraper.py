@@ -27,11 +27,13 @@ def reply_and_nested_reply( comment):
 config = configparser.ConfigParser()
 config.read("..\credentials.ini")
 
-reddit = praw.Reddit(client_id="59pl99dkRuWmIA",
-                     client_secret="TNgSvz9ciBzOQvf3r3fArnyZQGE",
-                     user_agent="social",
-                     username="julituli",
-                     password="z2sxqekj")
+
+reddit = praw.Reddit(client_id=config['REDDIT']['personal_use_script'],
+                     client_secret=config['REDDIT']['secret'],
+                     user_agent=config['REDDIT']['script_name'],
+                     username=config['REDDIT']['username'],
+                     password=config['REDDIT']['password'])
+
 
 print(reddit.user.me())
 print(game)
