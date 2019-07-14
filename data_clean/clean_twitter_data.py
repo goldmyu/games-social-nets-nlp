@@ -16,12 +16,13 @@ import nltk
 
 # =================================================================================================
 # datasets_folder = 'data-sets/'
-datasets_folder = '../../../../work/twitter_data_games/'
+datasets_folder = '../../../../../work/twitter_data_games/'
 clean_data_set_folder = datasets_folder + 'cleaned-data-sets/'
 
-dataset_name = 'minecraft.csv'
+dataset_name = 'pubg.csv'
 
 data = pd.read_csv(datasets_folder + dataset_name, usecols=['text', 'lang', 'truncated', 'extended_tweet'])
+# data = pd.read_csv(datasets_folder + dataset_name, usecols=['text', 'lang'])
 clean_data = pd.DataFrame(columns=['text'])
 # =================================================================================================
 
@@ -116,3 +117,4 @@ for i in range(data.shape[0]):
             clean_data = clean_data.iloc[0:0]
 
 write_df_to_csv(clean_data)
+print("\n\n\nFinished cleaning data for data-set : " + dataset_name)

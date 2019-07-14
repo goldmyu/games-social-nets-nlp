@@ -28,7 +28,7 @@ for i in range(df.shape[0]):
         data_stream.append(word_tokens)
 
 
-w2v_model = Word2Vec(min_count=7,
+w2v_model = Word2Vec(min_count=10,
                      window=5,
                      size=60,
                      negative=5,
