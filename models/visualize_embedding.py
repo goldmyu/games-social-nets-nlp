@@ -18,7 +18,7 @@ game_name = 'fortnite'
 # ======================================================================================================================
 
 w2v_model = Word2Vec.load("../saved_embedding_models/" + game_name + ".model")
-print(w2v_model.wv.most_similar(positive=['woman','gamer'], negative=['men']))
+print(w2v_model.wv.most_similar(positive=['woman','gamer'], negative=['man']))
 
 
 vocab = []
@@ -30,7 +30,7 @@ X = w2v_model[vocab]
 tsne = TSNE(n_components=2)
 X_tsne = tsne.fit_transform(X)
 df_tsne = pd.DataFrame(X_tsne, index=vocab, columns=['x', 'y'])
-df_tsne.to_csv("tsne_" + game_name + ".csv", index= False)
+df_tsne.to_csv("tsne_" + game_name + ".csv")
 
 plt.figure(figsize=(40, 30))
 plt.scatter(df_tsne['x'], df_tsne['y'])

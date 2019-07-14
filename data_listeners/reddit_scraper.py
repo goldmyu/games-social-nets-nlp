@@ -3,7 +3,7 @@ import configparser
 import pandas as pd
 import datetime as dt
 
-game= 'FUTMobile'
+game= 'PUBATTLEGROUNDS'
 def get_date(created):
     return dt.datetime.fromtimestamp(created)
 
@@ -27,14 +27,15 @@ def reply_and_nested_reply( comment):
 config = configparser.ConfigParser()
 config.read("..\credentials.ini")
 
-reddit = praw.Reddit(client_id=config['REDDIT']['personal_use_script'],
-                     client_secret=config['REDDIT']['secret'],
-                     user_agent=config['REDDIT']['script_name'],
-                     username=config['REDDIT']['username'],
-                     password=config['REDDIT']['password'])
+reddit = praw.Reddit(client_id="59pl99dkRuWmIA",
+                     client_secret="TNgSvz9ciBzOQvf3r3fArnyZQGE",
+                     user_agent="social",
+                     username="julituli",
+                     password="z2sxqekj")
 
 print(reddit.user.me())
-subreddit = reddit.subreddit('pubg')
+print(game)
+subreddit = reddit.subreddit(game)
 # top_subreddit = subreddit.search('israel')
 # top_subreddit = subreddit.search("fortnite")
 topics_dict = { "title":[], \
@@ -48,7 +49,7 @@ topics_dict = { "title":[], \
                 "type":[]}
 bag_of_text=[]
 # for submission in top_subreddit:
-for submission in subreddit.hot(limit=100000):
+for submission in subreddit.hot(limit=0):
     print(submission.title, submission.id)
     submission.comments.replace_more(limit=0)
 
