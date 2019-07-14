@@ -18,7 +18,10 @@ game_name = 'fortnite'
 # ======================================================================================================================
 
 w2v_model = Word2Vec.load("../saved_embedding_models/" + game_name + ".model")
-print(w2v_model.wv.most_similar(positive=['woman','gamer'], negative=['man']))
+print(w2v_model.wv.most_similar(positive=['woman', 'gamer'], negative=['man']))
+w2v_model.similarity(w1='fornite', w2='pubg')
+w2v_model.similarity(w1='fornite', w2='game')
+w2v_model.wv.similarity(w1='fornite', w2='sucks')
 
 
 vocab = []
@@ -36,5 +39,5 @@ plt.figure(figsize=(40, 30))
 plt.scatter(df_tsne['x'], df_tsne['y'])
 for word, pos in df_tsne.iterrows():
     plt.annotate(word, pos)
-plt.show()
+# plt.show()
 plt.savefig(game_name + "tsne_plot")
