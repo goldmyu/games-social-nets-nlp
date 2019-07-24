@@ -1,19 +1,4 @@
 from gensim.models import Word2Vec
-import pandas as pd
-from sklearn.manifold import TSNE
-import matplotlib.pyplot as plt
-
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-
-# ======================================================================================================================
-
-nltk.download('punkt')
-nltk.download('stopwords')
-stop_words = set(stopwords.words('english'))
-
-# game_name = 'fifa'
 
 # ======================================================================================================================
 
