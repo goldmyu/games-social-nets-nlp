@@ -10,13 +10,16 @@ lists_of_negative_words = {
                      'guido', 'hillbilly', 'islamophobic', 'islamophobe'],
     # 22
 
-    'trump_hate_words': ['drumpf', 'drumpff', 'meathead', 'orangutan', 'trumpster', 'trumpconcentrationcamps',
-                   'mattersfucktrump', 'antitrump', 'notrump', 'adiostrump'],
-    # 10
+    'trump_hate_words' : ['drumpf', 'drumpff', 'meathead', 'orangutan', 'trumpster', 'trumpconcentrationcamps',
+                  'mattersfucktrump',
+                  'antitrump', 'notrump', 'adiostrump', 'anyonebuttrump', 'trumpertantrum', 'fucktrump',
+                  'bloodontrumpshands', 'drumph',
+                  'drumpfisfinished', 'cheetoinchief'],
+# 17
 
-    'bad_words': ['shit', 'fuck', 'fucking', 'fucked', 'fucks', 'retard', 'retarded', 'asshole', 'hate', 'ass',
-                  'die', 'enemy', 'suck', 'sucks', 'toxic', 'dumb', 'terrible', 'bullshit', 'dick', 'evil', 'ugly',
-                  'idiot', 'idiots', 'dirty', 'disgusting', 'pussy', 'dumbass', 'pathetic'],
+    'bad_words' : ['shit', 'fuck', 'fucking', 'fucked', 'fucks', 'retard', 'retarded', 'asshole', 'assholes', 'hate',
+                 'ass', 'asses', 'die', 'enemy', 'suck', 'sucks', 'toxic', 'dumb', 'terrible', 'bullshit', 'dick', 'evil', 'ugly',
+                 'idiot', 'idiots', 'dirty', 'disgusting', 'pussy', 'dumbass', 'pathetic', 'cunt', 'hitler', 'molester'],
 
 }
 
