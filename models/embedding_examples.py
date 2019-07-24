@@ -63,7 +63,7 @@ def run_similar_examples(model, words):
 def find_all_triplets():
     for game_name, game_w2v_model in games_models_list.items():
         try:
-            print('Most intersting triplet examples for the game : ' + game_name)
+            print('Most interesting triplet examples for the game : ' + game_name)
             run_triplet_examples(game_w2v_model, word_triplets)
         except Exception as e:
             print("For game {}, got the following error:\n{}".format(game_name, str(e)))
@@ -73,10 +73,12 @@ def find_most_similar_words(lists_of_words):
     for game_name, game_w2v_model in games_models_list.items():
         for attribute, words in lists_of_words.items():
             try:
-                print('Printing similar words to {} in the game : {}'.format(attribute, game_name))
+                print("Printing similar words to '{}' in the game : {}".format(attribute, game_name))
                 run_similar_examples(game_w2v_model, words)
+                print("\n\n")
             except Exception as e:
                 print("For game {}, got the following error:\n{}".format(game_name, str(e)))
+
 
 
 # ================================= run functions ================================================================

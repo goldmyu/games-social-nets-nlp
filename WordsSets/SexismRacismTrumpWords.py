@@ -10,7 +10,7 @@ lists_of_negative_words = {
                      'guido', 'hillbilly', 'islamophobic', 'islamophobe'],
     # 22
 
-    'trump_hate': ['drumpf', 'drumpff', 'meathead', 'orangutan', 'trumpster', 'trumpconcentrationcamps',
+    'trump_hate_words': ['drumpf', 'drumpff', 'meathead', 'orangutan', 'trumpster', 'trumpconcentrationcamps',
                    'mattersfucktrump', 'antitrump', 'notrump', 'adiostrump'],
     # 10
 
@@ -31,7 +31,7 @@ lists_of_neutral_words = {
                            'nonamerican', 'latino', 'hispanic', 'hispanics', 'mexican', 'mexicans', 'islam',
                            'islamic', 'muslim', 'muslims'],
 
-    'trump_neutral': ['trump', 'donaldtrump', 'president', 'realdonaldtrump', 'donaldjtrumpthpresident'],
+    'neutral_trump_words': ['trump', 'donaldtrump', 'president', 'realdonaldtrump', 'donaldjtrumpthpresident'],
 }
 
 
