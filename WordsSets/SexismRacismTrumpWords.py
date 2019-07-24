@@ -18,8 +18,9 @@ neutral_race_words= ['jew', 'jews', 'jewish',  'asian', 'asians',  'arab', 'arab
                      'hispanic', 'hispanics', 'mexican', 'mexicans', 'islam', 'islamic',  'muslim', 'muslims']
 
 trump_hate =[ 'drumpf','drumpff',  'meathead', 'orangutan', 'trumpster','trumpconcentrationcamps' , 'mattersfucktrump',
-              'antitrump', 'notrump' , 'adiostrump']
-# 10
+              'antitrump', 'notrump' , 'adiostrump','anyonebuttrump', 'trumpertantrum','fucktrump','bloodontrumpshands','drumph',
+              'drumpfisfinished','cheetoinchief']
+# 17
 
 trump_neutral=['trump', 'donaldtrump', 'president', 'realdonaldtrump', 'donaldjtrumpthpresident']
 
@@ -30,8 +31,8 @@ maybe_Trump=['bumbledore', 'chickenhawk', 'taxevader','trumpofdoom', 'trumpenste
 
 
 
-bad_words =['shit', 'fuck' , 'fucking', 'fucked', 'fucks',  'retard', 'retarded',  'asshole', 'hate', 'ass',
+bad_words =['shit', 'fuck' , 'fucking', 'fucked', 'fucks',  'retard', 'retarded',  'asshole', 'assholes', 'hate', 'ass', 'asses',
             'die', 'enemy', 'suck', 'sucks', 'toxic', 'dumb', 'terrible', 'bullshit', 'dick', 'evil', 'ugly', 'idiot',
-            'idiots', 'dirty', 'disgusting', 'pussy', 'dumbass', 'pathetic'  ]
+            'idiots', 'dirty', 'disgusting', 'pussy', 'dumbass', 'pathetic','cunt' , 'hitler','molester' ]
 
 
