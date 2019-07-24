@@ -13,7 +13,7 @@ nltk.download('punkt')
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english'))
 
-game_name = 'fortnite'
+game_name = 'fifa'
 
 # ======================================================================================================================
 
@@ -35,7 +35,7 @@ word_triplets_general = [['man', 'woman', 'gamer'],  # gamergirl - man is to wom
                         ['man','pro','woman'],
                          ['gamer', 'pro', 'woman'],
                          ['man', 'asshole', 'woman'],
-                         ['dude', 'man', 'woman'],
+                         [ 'man','dude', 'woman'],
                          ['bro', 'dude', 'sister'],
                          ['gamer', 'game', 'woman'],
                          ['man', 'streamer', 'girl'],
@@ -44,18 +44,19 @@ word_triplets_general = [['man', 'woman', 'gamer'],  # gamergirl - man is to wom
                          ['trump', 'clinton', 'man'],
                          ['trump', 'islamophobic', 'clinton'],
                          ['trump', 'muslim', 'man'],
-
-                         ]
-
-word_triplets_fortnite = [['fortnie', 'pubg', 'trump'],
+                         ['fortnie', 'pubg', 'trump'],
                           ['trump', 'mexico', 'fortnite'],
                           ['fortnite', 'battleroyale', 'trump'],
                           ['man', 'fortnite', 'woman'],
                           ['gamer', 'fortnite', 'trump']
                           ]
 
+trump_hate =['trump','boldfinger', 'bratman', 'bumbledore', 'chickenhawk', 'taxevader', 'drumpf', 'meathead', 'tictacdough', 'trumpofdoom', 'trumpelthinskin', 'trumpenstein', 'trumpinator', 'trumpocalypse', 'trumptastrophe',
+             'trumpkopf', 'groepenfuehrer', 'orangutan', 'trumpamaniac', 'trumpster', 'adolftwitler']
 
-def run_examples(word_triplets_list):
+
+
+def run_triplet_examples(word_triplets_list):
     print('These are interesting embedding examples from the game : ' + game_name)
     for words_triples in word_triplets_list:
         most_similar = [x[0] for x in fortnite_model.wv.most_similar_cosmul(positive=[words_triples[1], words_triples[2]],
@@ -64,5 +65,14 @@ def run_examples(word_triplets_list):
             words_triples[0], words_triples[1], words_triples[2], most_similar))
 
 
-run_examples(word_triplets_general)
-run_examples(word_triplets_fortnite)
+def run_similar_examples(words):
+    for word in words:
+        try:
+            print(fortnite_model.wv.most_similar(positive=word, topn=10))
+        except:
+            print("word {} is not in vocab".format(word))
+
+# run_triplet_examples(word_triplets_general)
+run_similar_examples(trump_hate)
+
+
