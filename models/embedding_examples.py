@@ -20,7 +20,7 @@ stop_words = set(stopwords.words('english'))
 games_models_list = {
                     'fortnite': Word2Vec.load("../saved_embedding_models/fortnite.model"),
                     'pubg': Word2Vec.load("../saved_embedding_models/pubg.model"),
-                    'fifa': Word2Vec.load("../saved_embedding_models/fifa.model")
+                    'fifa': Word2Vec.load("../saved_embedding_models/fifa.model"),
                     'minecraft': Word2Vec.load("../saved_embedding_models/minecraft.model"),
                     'bloodstained': Word2Vec.load("../saved_embedding_models/bloodstained.model"),
                     'lol': Word2Vec.load("../saved_embedding_models/lol.model"),
