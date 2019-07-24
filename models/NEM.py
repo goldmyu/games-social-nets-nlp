@@ -10,7 +10,7 @@ properties = ['sexism', 'racism', 'trump-hate']  # "Racism" or "Trump-hate"
 alpha = 1 / 3
 beta = 1 / 3
 gamma = 1 / 3
-num_of_similar_words = 15
+num_of_similar_words = 25
 
 datasets_path = '../data-sets/'
 no_stop_words_prefix = 'clean_no_stop_words_'
@@ -89,7 +89,8 @@ def calc_x_sentiment_analysis(_game_name, _property, property_neutral_words):
             for word in _list:
                 if word in property_neutral_words:
                     num_of_posts += 1
-                    polarity += testimonial.sentiment.polarity
+                    if testimonial.sentiment.polarity < 0:
+                        polarity += testimonial.sentiment.polarity
                     break
     res = 0
     try:
