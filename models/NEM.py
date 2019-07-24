@@ -117,9 +117,21 @@ def calc_x_embedding(_game_name, _property, property_negative_words, property_ne
         except:
             print('the word {} dont exist in game {}'.format(neutral_word, _game_name))
 
+    neutral_counter = 0
+    existing_negative_words_in_vocab = 0
+    for negative_word in property_negative_words:
+        try:
+            similarity_list = game_model.wv.most_similar(positive=negative_word, topn=num_of_similar_words)
+            existing_negative_words_in_vocab += 1
+            for word in similarity_list:
+                if word[0] in property_neutral_words:
+                    neutral_counter += 1 / num_of_similar_words
+        except:
+            print('the word {} dont exist in game {}'.format(negative_word, _game_name))
+
     res = 0
     try:
-        res = neg_counter / existing_neutral_words_in_vocab
+        res = neg_counter / existing_neutral_words_in_vocab + neutral_counter/existing_negative_words_in_vocab
     except:
         res = 0
 

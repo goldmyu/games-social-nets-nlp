@@ -2,23 +2,43 @@ from textblob import TextBlob
 import numpy as np
 import pandas as pd
 
-path = '../data-sets/'
-name =''# 'clean_'
-files = ['fortnite_clean', 'clean-full-fortnite-no-duplicates']
+# ==================================================================================================================
+
+datasets_path = '../data-sets/'
+no_stop_words_prefix = 'clean_no_stop_words_'
+clean_prefix = 'clean_'
+
+games_df = {
+    'fortnite': pd.read_csv(datasets_path + clean_prefix + 'fortnite.csv'),
+    'pubg': pd.read_csv(datasets_path + clean_prefix + 'pubg.csv'),
+    'fifa': pd.read_csv(datasets_path + clean_prefix + 'fifa.csv'),
+    'minecraft': pd.read_csv(datasets_path + clean_prefix + 'minecraft.csv'),
+    'bloodstained': pd.read_csv(datasets_path + clean_prefix + 'bloodstained.csv'),
+    'lol': pd.read_csv(datasets_path + clean_prefix + 'lol.csv'),
+    'overwatch': pd.read_csv(datasets_path + clean_prefix + 'overwatch.csv'),
+    'sims': pd.read_csv(datasets_path + clean_prefix + 'sims.csv'),
+    'wow': pd.read_csv(datasets_path + clean_prefix + 'wow.csv'),
+    'dota2': pd.read_csv(datasets_path + clean_prefix + 'dota2.csv'),
+}
+
+results_df = pd.DataFrame(columns=['game_name', 'num_pos_pol', 'num_neg_pol', 'num_neu_pol'
+                                                                              'avg_positive_pol', 'avg_neg_pol avg',
+                                   'polarity_avg', 'subjectivity_avg', 'num_of_rows'])
 
 
-def calc(file_name):
-    data = pd.read_csv(path+file_name)
+# ==================================================================================================================
 
+
+def perform_sentiment_analysis(game_name, _game_df):
     polarity_sum = 0
     subjectivity_sum = 0
     positive_polarity_sum = 0
     negative_polarity_sum = 0
-    positive_polarity_num = 0
-    negative_polarity_num = 0
-    neutral_polarity_num = 0
+    num_pos_pol = 0
+    num_neg_pol = 0
+    num_neu_pol = 0
 
-    for row in data.values:
+    for row in _game_df.values:
         if type(row[0]) is str:
             testimonial = TextBlob(row[0])
             polarity_sum += testimonial.sentiment.polarity
@@ -27,29 +47,33 @@ def calc(file_name):
             # case polarity is positive
             if testimonial.sentiment.polarity > 0:
                 positive_polarity_sum += testimonial.sentiment.polarity
-                positive_polarity_num += 1
+                num_pos_pol += 1
             # case polarity is negative
             elif testimonial.sentiment.polarity < 0:
                 negative_polarity_sum += testimonial.sentiment.polarity
-                negative_polarity_num += 1
+                num_neg_pol += 1
             else:
-                neutral_polarity_num += 1
-
-
-    # df = pd.DataFrame(data=np.array(results), columns=['twite','polarity', 'subjectivity'])
-    # df.to_csv(path+'Results/Sentiment/'+file_name)
+                num_neu_pol += 1
 
     # average
-    num_of_rows = positive_polarity_num + negative_polarity_num + neutral_polarity_num
+    num_of_rows = num_pos_pol + num_neg_pol + num_neu_pol
+
     polarity_avg = polarity_sum / num_of_rows
     subjectivity_avg = subjectivity_sum / num_of_rows
-    positive_polarity_avg = positive_polarity_sum / positive_polarity_num
-    negative_polarity_avg = negative_polarity_sum / negative_polarity_num
-    array = [[positive_polarity_avg, negative_polarity_avg, positive_polarity_num, negative_polarity_num, neutral_polarity_num, polarity_avg, subjectivity_avg, num_of_rows]]
+    positive_polarity_avg = positive_polarity_sum / num_pos_pol
+    negative_polarity_avg = negative_polarity_sum / num_neg_pol
 
-    df_avg = pd.DataFrame(data=np.array(array), columns=['positive pol avg', 'negative pol avg', 'num of positive polarity', 'num of negative polarity','num of neutral polarity','polarity_avg', 'subjectivity_avg', 'num_of_rows'])
-    df_avg.to_csv(path+'Results/Sentiment_Average/'+file_name)
+    results_df.append({'game_name': game_name, 'num_pos_pol': num_pos_pol, 'num_neg_pol': num_neg_pol,
+                       'num_neu_pol': num_neu_pol, 'avg_positive_pol': positive_polarity_avg,
+                       'avg_neg_pol avg': negative_polarity_avg, 'polarity_avg': polarity_avg,
+                       'subjectivity_avg': subjectivity_avg, 'num_of_rows': num_of_rows}, ignore_index=True)
 
 
-for file in files:
-    calc(name + file + '.csv')
+def main():
+    for game_name, game_df in games_df.items():
+        perform_sentiment_analysis(game_name, game_df)
+    results_df.to_csv(datasets_path + 'games_sentiment_analysis.csv', index=False)
+
+
+if __name__ == '__main__':
+    main()
