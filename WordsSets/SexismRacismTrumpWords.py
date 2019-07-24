@@ -17,9 +17,10 @@ lists_of_negative_words = {
                   'drumpfisfinished', 'cheetoinchief'],
 # 17
 
-    'bad_words' : ['shit', 'fuck', 'fucking', 'fucked', 'fucks', 'retard', 'retarded', 'asshole', 'assholes', 'hate',
+    'bad_words' : ['shit', 'fuck', 'fucking', 'fucked', 'fucks','fuckers', 'fucker', 'retard', 'retarded', 'asshole', 'assholes', 'hate',
                  'ass', 'asses', 'die', 'enemy', 'suck', 'sucks', 'toxic', 'dumb', 'terrible', 'bullshit', 'dick', 'evil', 'ugly',
-                 'idiot', 'idiots', 'dirty', 'disgusting', 'pussy', 'dumbass', 'pathetic', 'cunt', 'hitler', 'molester'],
+                 'idiot', 'idiots', 'dirty', 'disgusting', 'pussy', 'dumbass', 'pathetic', 'cunt', 'hitler', 'molester',
+                   'donkey', 'rat','harass', 'stupid','shithole', 'motherfuckers','traitorsx'],
 
 }
 
