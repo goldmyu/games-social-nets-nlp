@@ -40,12 +40,8 @@ word_triplets = [['man', 'woman', 'gamer'],  # gamergirl - man is to woman as ga
                  ['fortnite', 'battleroyale', 'trump'],
                  ['man', 'fortnite', 'woman'],
                  ['gamer', 'fortnite', 'trump']
-                 ]
+]
 
-trump_hate = ['trump', 'boldfinger', 'bratman', 'bumbledore', 'chickenhawk', 'taxevader', 'drumpf', 'meathead',
-              'tictacdough', 'trumpofdoom', 'trumpelthinskin', 'trumpenstein', 'trumpinator', 'trumpocalypse',
-              'trumptastrophe',
-              'trumpkopf', 'groepenfuehrer', 'orangutan', 'trumpamaniac', 'trumpster', 'adolftwitler']
 
 
 def run_triplet_examples(model, _word_triplets):
