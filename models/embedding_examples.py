@@ -18,29 +18,29 @@ games_models_list = {
 # ======================================================================================================================
 
 word_triplets = [['man', 'woman', 'gamer'],  # gamergirl - man is to woman as gamer is to gamergirl
-                         ['woman', 'bitch', 'man'],  # bitch, slut, crazy
-                         ['man', 'bro', 'woman'],  # bitch
-                         ['man', 'nigga', 'woman'],
-                         ['man', 'winner', 'woman'],
-                         ['man', 'woman', 'pro'],
-                         ['man', 'pro', 'woman'],
-                         ['gamer', 'pro', 'woman'],
-                         ['man', 'asshole', 'woman'],
-                         ['man', 'dude', 'woman'],
-                         ['bro', 'dude', 'sister'],
-                         ['gamer', 'game', 'woman'],
-                         ['man', 'streamer', 'girl'],
-                         ['trump', 'president', 'clinton'],
-                         ['trump', 'usa', 'clinton'],
-                         ['trump', 'clinton', 'man'],
-                         ['trump', 'islamophobic', 'clinton'],
-                         ['trump', 'muslim', 'man'],
-                         ['fortnie', 'pubg', 'trump'],
-                         ['trump', 'mexico', 'fortnite'],
-                         ['fortnite', 'battleroyale', 'trump'],
-                         ['man', 'fortnite', 'woman'],
-                         ['gamer', 'fortnite', 'trump']
-                         ]
+                 ['woman', 'bitch', 'man'],  # bitch, slut, crazy
+                 ['man', 'bro', 'woman'],  # bitch
+                 ['man', 'nigga', 'woman'],
+                 ['man', 'winner', 'woman'],
+                 ['man', 'woman', 'pro'],
+                 ['man', 'pro', 'woman'],
+                 ['gamer', 'pro', 'woman'],
+                 ['man', 'asshole', 'woman'],
+                 ['man', 'dude', 'woman'],
+                 ['bro', 'dude', 'sister'],
+                 ['gamer', 'game', 'woman'],
+                 ['man', 'streamer', 'girl'],
+                 ['trump', 'president', 'clinton'],
+                 ['trump', 'usa', 'clinton'],
+                 ['trump', 'clinton', 'man'],
+                 ['trump', 'islamophobic', 'clinton'],
+                 ['trump', 'muslim', 'man'],
+                 ['fortnie', 'pubg', 'trump'],
+                 ['trump', 'mexico', 'fortnite'],
+                 ['fortnite', 'battleroyale', 'trump'],
+                 ['man', 'fortnite', 'woman'],
+                 ['gamer', 'fortnite', 'trump']
+                 ]
 
 trump_hate = ['trump', 'boldfinger', 'bratman', 'bumbledore', 'chickenhawk', 'taxevader', 'drumpf', 'meathead',
               'tictacdough', 'trumpofdoom', 'trumpelthinskin', 'trumpenstein', 'trumpinator', 'trumpocalypse',
@@ -64,9 +64,6 @@ def run_similar_examples(model, words):
             print("word {} is not in vocab".format(word))
 
 
-# run_triplet_examples(word_triplets_general)
-
-
 for game_name, game_w2v_model in games_models_list.items():
     try:
         print('Most similar words from the game : ' + game_name)
@@ -74,4 +71,4 @@ for game_name, game_w2v_model in games_models_list.items():
         print('Most intersting triplet examples for the game : ' + game_name)
         run_triplet_examples(game_w2v_model, word_triplets)
     except Exception as e:
-        print("For game {}, got the following error:\n{}".format(game_name,str(e)))
+        print("For game {}, got the following error:\n{}".format(game_name, str(e)))
