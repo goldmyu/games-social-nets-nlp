@@ -8,7 +8,7 @@ from WordsSets.SexismRacismTrumpWords import *
 properties = ['sexism', 'racism', 'trump-hate']  # "Racism" or "Trump-hate"
 
 alpha = 0.3
-beta = -0.1
+beta = 0.1
 gamma = 0.6
 num_of_similar_words = 25
 
@@ -137,7 +137,7 @@ def main():
             x_embedding = calc_x_embedding(game_name, _property, property_negative_words, property_neutral_words)
             x_term_freq = calc_x_term_freq(game_df_no_stopwords, _property, property_negative_words)
             x_sent_analysis = calc_x_sentiment_analysis(game_name, _property, property_neutral_words)
-            nem_value = alpha * x_term_freq + beta * x_sent_analysis + gamma * x_embedding
+            nem_value = (alpha * x_term_freq) - (beta * x_sent_analysis) + (gamma * x_embedding)
 
             res_df = res_df.append({'game_name': game_name, 'property': _property,
                                     'nem': nem_value, 'x_term_freq': x_term_freq,
