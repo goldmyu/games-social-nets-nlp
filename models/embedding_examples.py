@@ -1,4 +1,5 @@
 from gensim.models import Word2Vec
+from WordsSets.SexismRacismTrumpWords import *
 
 # ======================================================================================================================
 
@@ -40,8 +41,7 @@ word_triplets = [['man', 'woman', 'gamer'],  # gamergirl - man is to woman as ga
                  ['fortnite', 'battleroyale', 'trump'],
                  ['man', 'fortnite', 'woman'],
                  ['gamer', 'fortnite', 'trump']
-]
-
+                 ]
 
 
 def run_triplet_examples(model, _word_triplets):
@@ -55,16 +55,31 @@ def run_triplet_examples(model, _word_triplets):
 def run_similar_examples(model, words):
     for word in words:
         try:
-            print(model.wv.most_similar(positive=word, topn=10))
+            print("most similar words to '{}' are {}".format(word, model.wv.most_similar(positive=word, topn=10)))
         except:
             print("word {} is not in vocab".format(word))
 
 
-for game_name, game_w2v_model in games_models_list.items():
-    try:
-        print('Most similar words from the game : ' + game_name)
-        run_similar_examples(game_w2v_model, trump_hate)
-        print('Most intersting triplet examples for the game : ' + game_name)
-        run_triplet_examples(game_w2v_model, word_triplets)
-    except Exception as e:
-        print("For game {}, got the following error:\n{}".format(game_name, str(e)))
+def find_all_triplets():
+    for game_name, game_w2v_model in games_models_list.items():
+        try:
+            print('Most intersting triplet examples for the game : ' + game_name)
+            run_triplet_examples(game_w2v_model, word_triplets)
+        except Exception as e:
+            print("For game {}, got the following error:\n{}".format(game_name, str(e)))
+
+
+def find_most_similar_words(lists_of_words):
+    for game_name, game_w2v_model in games_models_list.items():
+        for attribute, words in lists_of_words.items():
+            try:
+                print('Printing similar words to {} in the game : {}'.format(attribute, game_name))
+                run_similar_examples(game_w2v_model, words)
+            except Exception as e:
+                print("For game {}, got the following error:\n{}".format(game_name, str(e)))
+
+
+# ================================= run functions ================================================================
+# find_all_triplets()
+# find_most_similar_words(lists_of_negative_words)
+find_most_similar_words(lists_of_neutral_words)
