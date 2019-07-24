@@ -91,7 +91,13 @@ def calc_x_sentiment_analysis(_game_name, _property, property_neutral_words):
                     num_of_posts += 1
                     polarity += testimonial.sentiment.polarity
                     break
-    return polarity / num_of_posts
+    res = 0
+    try:
+        res = polarity / num_of_posts
+    except:
+        res = 0
+
+    return res
 
 
 def calc_x_embedding(_game_name, _property, property_negative_words, property_neutral_words):
@@ -109,10 +115,18 @@ def calc_x_embedding(_game_name, _property, property_negative_words, property_ne
                     neg_counter += 1 / num_of_similar_words
         except:
             print('the word {} dont exist in game {}'.format(neutral_word, _game_name))
-    return neg_counter/existing_neutral_words_in_vocab
+
+    res = 0
+    try:
+        res = neg_counter / existing_neutral_words_in_vocab
+    except:
+        res = 0
+
+    return res
 
 
 def main():
+    res_df = pd.DataFrame(columns=['game_name','property','nem','x_term_freq','x_sent_analysis','x_embedding'])
     for game_name, game_df_no_stopwords in games_df_no_stopwords.items():
         print("calculating NEM values for game {}".format(game_name))
         for _property in properties:
@@ -122,10 +136,17 @@ def main():
             x_embedding = calc_x_embedding(game_name, _property, property_negative_words, property_neutral_words)
             x_term_freq = calc_x_term_freq(game_df_no_stopwords, _property, property_negative_words)
             x_sent_analysis = calc_x_sentiment_analysis(game_name, _property, property_neutral_words)
-            nem_value = alpha * x_term_freq + beta * x_sent_analysis + gamma * x_embedding
+            nem_value = alpha * x_term_freq - beta * x_sent_analysis + gamma * x_embedding
+
+            res_df = res_df.append({'game_name': game_name, 'property': _property,
+                                    'nem': nem_value, 'x_term_freq': x_term_freq,
+                                    'x_sent_analysis': x_sent_analysis, 'x_embedding': x_embedding}, ignore_index=True)
+
             print('for the game {}, NEM value of the property {} is {} - x_term_freq {} '
                   'x_sent_analysis {} x_embedding {}'.format(game_name, _property, nem_value,
                                                              x_term_freq, x_sent_analysis, x_embedding))
+
+            res_df.to_csv('games_nem_results.csv', index=False)
 
 
 if __name__ == '__main__':
