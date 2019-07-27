@@ -61,20 +61,20 @@ def perform_sentiment_analysis(game_name, _game_df, _results_df):
 
     _results_df = _results_df.append({'game_name': game_name, 'num_pos_pol': num_pos_pol, 'num_neg_pol': num_neg_pol,
                                       'num_neu_pol': num_neu_pol, 'avg_positive_pol': positive_polarity_avg,
-                                      'avg_neg_pol avg': negative_polarity_avg, 'polarity_avg': polarity_avg,
+                                      'avg_neg_pol': negative_polarity_avg, 'polarity_avg': polarity_avg,
                                       'subjectivity_avg': subjectivity_avg, 'num_of_rows': num_of_rows},
                                      ignore_index=True)
 
     print({'game_name': game_name, 'num_pos_pol': num_pos_pol, 'num_neg_pol': num_neg_pol,
            'num_neu_pol': num_neu_pol, 'avg_positive_pol': positive_polarity_avg,
-           'avg_neg_pol avg': negative_polarity_avg, 'polarity_avg': polarity_avg,
+           'avg_neg_pol': negative_polarity_avg, 'polarity_avg': polarity_avg,
            'subjectivity_avg': subjectivity_avg, 'num_of_rows': num_of_rows})
     return _results_df
 
 
 def main():
     results_df = pd.DataFrame(columns=['game_name', 'num_pos_pol', 'num_neg_pol', 'num_neu_pol'
-                                                                                  'avg_positive_pol', 'avg_neg_pol avg',
+                                        'avg_positive_pol', 'avg_neg_pol',
                                        'polarity_avg', 'subjectivity_avg', 'num_of_rows'])
     for game_name, game_df in games_df.items():
         results_df = perform_sentiment_analysis(game_name, game_df, results_df)
